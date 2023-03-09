@@ -12,6 +12,7 @@ const Header  = () => (
             <TMDBLogoImg src={TMBDLogo} alt='tmdb-logo'/>
         </Content>
     </Wrapper>
+    
 );
 
 export default Header;
