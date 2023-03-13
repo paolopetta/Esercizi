@@ -14,9 +14,6 @@ export const useComuniFetch = () => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
 
-    console.log(searchTerm)
-
-
     const fetchComuni = async (searchTerm = "") => {
         try{
             setError(false);
@@ -25,6 +22,7 @@ export const useComuniFetch = () => {
             const comuni = await API.fetchComuni(searchTerm);
 
             setState({results: comuni});
+            console.log(state)
         }catch (error){
             console.log(error)
             setError(true)

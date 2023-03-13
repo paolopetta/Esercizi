@@ -4,7 +4,7 @@ import React from "react";
 //import HeroImage from "./HeroImage";
 import Grid from "./Grid";
 import SearchBar from "./SearchBar";
-import Thumb from "./Thumb";
+import Card from "./Card";
 
 // Hook
 import {useComuniFetch} from '../hooks/useComuniFetch'
@@ -22,7 +22,7 @@ const Home = () => {
             <SearchBar setSearchTerm={setSearchTerm}/>
             <Grid header='Risultato'>
                 {state.results.map(comuni => (
-                    <div>{comuni.nome} Cap: {comuni.cap}</div>
+                    <Card nome={comuni.nome} cap={comuni.cap}/>
                 ))}
             </Grid>
         </>

@@ -10,6 +10,7 @@ const Grid = ({ header, children }) => (
   </Wrapper>
 );
 
+//Validazione della stringa
 Grid.propTypes = {
   header: PropTypes.string
 };
