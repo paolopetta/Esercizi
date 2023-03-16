@@ -1,0 +1,69 @@
+# dependencies
+node_modules
+./node_modules
+node_modules/
+packages/**/node_modules
+backend_development.json
+# testing
+/coverage
+globalConfig.json
+
+# production
+build/
+/build
+./build
+dist
+/dist
+out
+.next
+_next
+.out
+packages/**/dist
+packages/ui/lib
+__generated__
+config_local.js
+
+# envs
+.DS_Store
+.env.local
+.env.development
+.env.test.local
+.env.production.local
+
+
+# logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.stats.json
+
+# yarn
+.yarn/*
+!.yarn/patches
+!.yarn/releases
+!.yarn/plugins
+!.yarn/sdks
+!.yarn/versions
+.pnp.*
+# editors
+.history
+**/.history
+.idea
+.expo
+.expo-shared
+*.jks
+.vscode
+.tmp
+tmp
+/.pnp
+.pnp
+.pnp.js
+.history
+.DS_Store
+
+
+backend_development.json
+storybook-docs
+
+**/cypress/videos
+**/cypress/screenshots
