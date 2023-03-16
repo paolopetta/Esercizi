@@ -7,26 +7,25 @@ const initialState = {
   total_results: 0,
 };
 
-export const useComuniFetch = () => {
+export const useProvinceFetch = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [state, setState] = useState(initialState);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
 
-  const fetchComuni = async (searchTerm = "") => {
+  const fetchProvince = async (searchTerm = "") => {
     try {
       setError(false);
       setLoading(true);
 
       if (searchTerm === "") {
-        const allComuni = await API.fetchAllComuni();
-        setState({ results: allComuni });
+        const allProvince = await API.fetchAll(searchTerm);
+        setState({ results: allProvince });
       } else {
-        //const comuni = await API.fetchSearchComuni(searchTerm);
-        const comuni = await API.fetchSearchMerge(searchTerm);
-        //console.log(comuni[0].result[0].nome);
-
-        setState({ results: comuni });
+        const Province = await API.fetchProvinceMongo(searchTerm);
+        //const cap = await API.fetchCap(searchTerm);
+        //setState({ results: Province.concat(cap) });
+        setState({ results: Province });
       }
     } catch (error) {
       console.log(error);
@@ -37,7 +36,7 @@ export const useComuniFetch = () => {
 
   useEffect(() => {
     setState(initialState);
-    fetchComuni(searchTerm);
+    fetchProvince(searchTerm);
   }, [searchTerm]);
 
   return { state, loading, error, setSearchTerm };

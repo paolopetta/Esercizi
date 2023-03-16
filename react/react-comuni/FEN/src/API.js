@@ -1,18 +1,26 @@
 export default {
-  /*fetchComuni: (searchTerm) =>
+  /* Ricerca su file
+  fetchComuni: (searchTerm) =>
     data.filter((element) =>
       element["nome"].toLowerCase().includes(searchTerm.toLowerCase())
     ),*/
 
-  fetchComuniMongo: (searchTerm) => {
+  fetchAllComuni: () => {
+    return fetch("http://localhost:5000/getAllComuni", {
+      method: "GET",
+      mode: "cors",
+    }).then((response) => response.json());
+  },
+
+  fetchSearchComuni: (searchTerm) => {
     return fetch("http://localhost:5000/comuni/" + searchTerm, {
       method: "GET",
       mode: "cors",
     }).then((response) => response.json());
   },
 
-  fetchCap: (searchTerm) => {
-    return fetch("http://localhost:5000/cap/" + searchTerm, {
+  fetchSearchMerge: (searchTerm) => {
+    return fetch("http://localhost:5000/merge/" + searchTerm, {
       method: "GET",
       mode: "cors",
     }).then((response) => response.json());
