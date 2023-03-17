@@ -1,5 +1,5 @@
 import React from "react";
-import { Wrapper, Content } from "./Card.styles";
+import { Wrapper, Content, Data } from "./Card.styles";
 // Styles
 
 const Card = ({ nome, cap, provincia }) => (
@@ -8,7 +8,10 @@ const Card = ({ nome, cap, provincia }) => (
       <strong>Nome:</strong> {nome}
     </Content>
     <Content>
-      <strong>Cap:</strong> {cap}
+      <strong>Cap:</strong>{" "}
+      {cap.map((capSingle) => {
+        return <Data> {capSingle} </Data>;
+      })}
     </Content>
     <Content>
       <strong>Prov:</strong> {provincia}
