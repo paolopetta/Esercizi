@@ -79,16 +79,6 @@ app.get("/merge/:search", async function (req, res, next) {
   res.send(result);
 });
 
-/*app.get("/cap/:cap", async function (req, res, next) {
-  const collection = "comuni";
-  const cap = req.params.cap;
-  const result = await global.db
-    .collection(collection)
-    .find({ cap: cap })
-    .toArray();
-  res.send(result);
-});*/
-
 app.listen(5000, () => {
   console.log("Listening on port 5000");
 });
