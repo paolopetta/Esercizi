@@ -1,6 +1,4 @@
-
-
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const Wrapper = styled.div`
   background: var(--darkGrey);
@@ -17,9 +15,9 @@ export const Content = styled.div`
 `;
 
 export const LogoImg = styled.img`
-  width: 200px;
+  width: 300px;
   @media screen and (max-width: 500px) {
-    width: 150px;
+    width: 70px;
   }
 `;
 

@@ -19,12 +19,14 @@ export const useComuniFetch = () => {
       setLoading(true);
 
       if (searchTerm === "") {
-        const allComuni = await API.fetchAllComuni();
+        //const allComuni = await API.fetchAllComuni();
+        const allComuni = await API.fetchComuniMerge();
+        //console.log(allComuni);
         setState({ results: allComuni });
       } else {
         //const comuni = await API.fetchSearchComuni(searchTerm);
-        const comuni = await API.fetchSearchMerge(searchTerm);
-        //console.log(comuni[0].result[0].nome);
+        //const comuni = await API.fetchSearchMerge(searchTerm);
+        const comuni = await API.fetchComuniMergeSearch(searchTerm);
 
         setState({ results: comuni });
       }

@@ -28,7 +28,6 @@ app.get("/getAllComuni", async function (req, res, next) {
   //const result = await global.db.collection(collection).find({}).toArray();
   const result = await global.db
     .collection(collection)
-    //.find({ $or: [{ $text: { $search: search } }, { cap: search }] })
     .aggregate([
       {
         $lookup: {
@@ -76,6 +75,104 @@ app.get("/merge/:search", async function (req, res, next) {
       },
     ])
     .toArray();
+  res.send(result);
+});
+
+app.get("/comuniMerge/:search", async function (req, res, next) {
+  const collection = "comuni_nuovi";
+  const search = req.params.search;
+  const result = await global.db
+    .collection(collection)
+    .aggregate([
+      {
+        $match: {
+          $text: { $search: search },
+        },
+      },
+      {
+        $lookup: {
+          from: "comuni",
+          localField: "Codice Comune formato alfanumerico",
+          foreignField: "codice",
+          as: "comuni",
+        },
+      },
+    ])
+    .toArray();
+
+  //Ora in result ho i dati del merge
+  //Rimaneggio result per aggiungere il report
+  const report = result.map((element) => {
+    if (element.comuni.length == 0) {
+      return (element.reportComuni = "Non presente");
+    } else return (element.reportComuni = "Presente");
+  });
+
+  const result2016 = await global.db
+    .collection(collection)
+    .aggregate([
+      {
+        $lookup: {
+          from: "comuni_2016",
+          localField: "codice",
+          foreignField: "codice",
+          as: "comuni2016",
+        },
+      },
+    ])
+    .toArray();
+
+  const report2016 = result.map((element) => {
+    if (element.comuni.length == 0) {
+      return (element.reportComuni2016 = "Non presente");
+    } else return (element.reportComuni2016 = "Presente");
+  });
+
+  res.send(result);
+});
+
+app.get("/comuniMerge", async function (req, res, next) {
+  const collection = "comuni_nuovi";
+  const result = await global.db
+    .collection(collection)
+    .aggregate([
+      {
+        $lookup: {
+          from: "comuni",
+          localField: "Codice Comune formato alfanumerico",
+          foreignField: "codice",
+          as: "comuni",
+        },
+      },
+    ])
+    .toArray();
+
+  const report = result.map((element) => {
+    if (element.comuni.length == 0) {
+      return (element.reportComuni = "Non presente");
+    } else return (element.reportComuni = "Presente");
+  });
+
+  const result2016 = await global.db
+    .collection(collection)
+    .aggregate([
+      {
+        $lookup: {
+          from: "comuni_2016",
+          localField: "codice",
+          foreignField: "codice",
+          as: "comuni2016",
+        },
+      },
+    ])
+    .toArray();
+
+  const report2016 = result.map((element) => {
+    if (element.comuni.length == 0) {
+      return (element.reportComuni2016 = "Non presente");
+    } else return (element.reportComuni2016 = "Presente");
+  });
+
   res.send(result);
 });
 

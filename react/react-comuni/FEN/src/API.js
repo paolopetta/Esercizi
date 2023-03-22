@@ -25,4 +25,18 @@ export default {
       mode: "cors",
     }).then((response) => response.json());
   },
+
+  fetchComuniMergeSearch: (searchTerm) => {
+    return fetch("http://localhost:5000/comuniMerge/" + searchTerm, {
+      method: "GET",
+      mode: "cors",
+    }).then((response) => response.json());
+  },
+
+  fetchComuniMerge: () => {
+    return fetch("http://localhost:5000/comuniMerge", {
+      method: "GET",
+      mode: "cors",
+    }).then((response) => response.json());
+  },
 };
