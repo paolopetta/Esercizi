@@ -20,22 +20,27 @@ const Home = () => {
     <>
       <SearchBar setSearchTerm={setSearchTerm} />
       <Grid header="Risultato">
-        {state.results.map((comuni) => (
-          //console.log(comuni),
-          <Card
-            nome={
-              comuni["Denominazione in italiano"]
-                ? comuni["Denominazione in italiano"]
-                : comuni["Denominazione Comune"]
-            }
-            //cap={comuni?.cap}
-            // provincia={comuni.result[0]?.["nome"]}
-            //nome={comuni?.nome}
-            codice={comuni?.["Codice Comune formato alfanumerico"]}
-            reportComuni={comuni?.reportComuni}
-            reportComuni2016={comuni?.reportComuni2016}
-          />
-        ))}
+        {state.results.map(
+          (comuni) => (
+            console.log(comuni),
+            (
+              <Card
+                nome={
+                  comuni["Denominazione in italiano"]
+                    ? comuni["Denominazione in italiano"]
+                    : comuni["Denominazione Comune"]
+                }
+                //cap={comuni?.cap}
+                // provincia={comuni.result[0]?.["nome"]}
+                //nome={comuni?.nome}
+                codice={comuni?.["Codice Comune formato alfanumerico"]}
+                provincia={comuni?.["Codice Comune formato alfanumerico"]}
+                cap={comuni?.cap}
+                codCatastale={comuni?.["Codice Catastale del comune"]}
+              />
+            )
+          )
+        )}
       </Grid>
     </>
   );

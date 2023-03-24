@@ -3,14 +3,14 @@ const { MongoClient } = require("mongodb");
 const app = express();
 const cors = require("cors");
 
-const dbURL = "mongodb://localhost:27017/comuni";
+const dbURL = "mongodb://localhost:27017/esercizio_comuni";
 let db;
 
 app.use(cors());
 
 async function main() {
   const client = await new MongoClient(dbURL);
-  global.db = client.db("comuni");
+  global.db = client.db("esercizio_comuni");
 
   try {
     await client.connect();
@@ -81,7 +81,7 @@ app.get("/merge/:search", async function (req, res, next) {
 app.get("/comuniMerge/:search", async function (req, res, next) {
   const collection = "comuni_nuovi";
   const search = req.params.search;
-  const result = await global.db
+  let result = await global.db
     .collection(collection)
     .aggregate([
       {
@@ -104,26 +104,23 @@ app.get("/comuniMerge/:search", async function (req, res, next) {
     ])
     .toArray();
 
-  //Cappeda non viene trovato il riferimento
+  let resultPar = [];
 
   for (const comuneTrovato of result) {
-    console.log(comuneTrovato);
-    console.log(comuneTrovato?.["Denominazione Comune"]);
-    //Se e soppresso
     if (comuneTrovato?.soppresso) {
-      const riferimento = await global.db
+      singleQuery = await global.db
         .collection("comuni_nuovi")
         .find({
           "Codice Comune formato alfanumerico":
             comuneTrovato["Codice del Comune associato alla variazione"],
         })
         .toArray();
-      console.log(riferimento);
-      res.send(riferimento);
-    } else res.send(result);
+      resultPar.push(...singleQuery);
+    }
   }
 
-  //qui potrei scorrere l'array per verificare i soppressi
+  result = resultPar;
+  res.send(result);
 
   //Ora in result ho i dati del merge
   //Rimaneggio result per aggiungere il report

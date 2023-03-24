@@ -2,7 +2,7 @@ import React from "react";
 import { Wrapper, Content, Data } from "./Card.styles";
 // Styles
 
-const Card = ({ nome, codice, provincia, reportComuni, reportComuni2016 }) => (
+const Card = ({ nome, codice, provincia, cap, codCatastale }) => (
   <Wrapper>
     <Content>
       <strong>Nome:</strong> {nome}
@@ -17,10 +17,10 @@ const Card = ({ nome, codice, provincia, reportComuni, reportComuni2016 }) => (
       <strong>Provincia:</strong> <Data>{provincia}</Data>
     </Content>
     <Content>
-      <strong>Report Comuni:</strong> <Data>{reportComuni}</Data>
+      <strong>Cap:</strong> <Data>{cap}</Data>
     </Content>
     <Content>
-      <strong>Report Comuni 2016:</strong> <Data>{reportComuni2016}</Data>
+      <strong>Cod Catastale</strong> <Data>{codCatastale}</Data>
     </Content>
   </Wrapper>
 );
